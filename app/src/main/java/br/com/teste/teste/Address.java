@@ -2,10 +2,12 @@ package br.com.teste.teste;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by foo on 15/09/15.
  */
-public class Address {
+public class Address implements Serializable {
 
     @SerializedName("street")
     private String street;
@@ -49,5 +51,10 @@ public class Address {
 
     public void setCEP(String CEP) {
         this.CEP = CEP;
+    }
+
+    public String toString () {
+        String conjunto = street + " - " + complemento + "\n" + city + "\n" + "CEP:" + CEP;
+        return conjunto;
     }
 }

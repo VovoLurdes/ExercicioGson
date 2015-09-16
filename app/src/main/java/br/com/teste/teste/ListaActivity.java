@@ -1,10 +1,13 @@
 package br.com.teste.teste;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -32,7 +35,7 @@ public class ListaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista);
-        ListView listUsuarios = (ListView) findViewById(R.id.lista_usuarios);
+        listaUsuario = (ListView) findViewById(R.id.lista_usuarios);
         client = new AsyncHttpClient();
         client.get(ListaActivity.this, URL, new AsyncHttpResponseHandler() {
             @Override
@@ -53,6 +56,19 @@ public class ListaActivity extends AppCompatActivity {
             }
         });
 
+        listaUsuario.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent edicao = new Intent(
+                        ListaActivity.this,
+                        InformacoesActivity.class);
+
+                Usuario selecionado = (Usuario) parent.getItemAtPosition(position);
+                edicao.putExtra("usuarioselecionado",selecionado);
+                startActivity(edicao);
+
+            }
+        });
 
 
     }

@@ -2,10 +2,12 @@ package br.com.teste.teste;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by foo on 15/09/15.
  */
-public class Usuario {
+public class Usuario implements Serializable  {
 
     @SerializedName("id")
     private Long id;
@@ -25,6 +27,16 @@ public class Usuario {
     @SerializedName("website")
     private String website;
 
+    @SerializedName("address")
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public Long getId() {
         return id;
@@ -74,5 +86,6 @@ public class Usuario {
     public void setWebsite(String website) {
         this.website = website;
     }
+
 
 }
